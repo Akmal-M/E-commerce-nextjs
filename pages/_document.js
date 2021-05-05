@@ -6,14 +6,13 @@ class MyDocument extends Document {
             <Html lang='en'>
                 <Head>
                     <meta name='description' content="Akmal's E-commerce website Next.js"/>
-                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-                    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"> </script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"> </script>
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"> </script>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"/>
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"/>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"/>
                 </Head>
                 <body>
-                    <Main/>
-                    <NextScript/>
+                <Main/>
+                <NextScript/>
                 </body>
             </Html>
         )
