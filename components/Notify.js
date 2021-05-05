@@ -3,17 +3,21 @@ import {DataContext} from '../store/GlobalState'
 import Loading from "./Loading";
 import Toast from "./Toast";
 
-
-
 const Notify = () => {
     const [state, dispatch] = useContext(DataContext)
     const {notify} = state
     return (
-        <div>
+        <>
             {notify.Loading && <Loading/>}
-            {notify.error && <Toast/>}
-            {notify.success && <Toast/>}
-        </div>
+            {notify.error &&
+            <Toast msg={{msg:notify.err, title:"Error"}}
+            handleShow={() => dispatch({type:'NOTIFY', payload:{} })}
+            bgColor='bg-danger'/>}
+            {notify.success &&
+            <Toast msg={{msg:notify.success, title:"Success"}}
+                   handleShow={() => dispatch({type:'NOTIFY', payload:{} })}
+                   bgColor='bg-success'/>}
+        </>
     );
 };
 
