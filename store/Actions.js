@@ -49,3 +49,5 @@ export const updateItem = (data, id, post, type) => {
     const newData = data.map(item => (item._id === id ? post : item))
     return ({ type, payload: newData})
 }
+
+export default ACTIONS

@@ -11,7 +11,7 @@ const Toast = ({msg, handleShow, bgColor}) => {
                         onClick={handleShow}>x</button>
             </div>
 
-            <div className="toast-body">{msg.msg}</div>
+            <div className="toast-body " style={{color:"white"}}>{msg.msg}</div>
 
         </div>
     )

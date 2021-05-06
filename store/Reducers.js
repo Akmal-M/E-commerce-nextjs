@@ -1,4 +1,4 @@
-import {ACTIONS} from "./Actions";
+import ACTIONS from "./Actions";
 
 const reducers = (state, action) => {
     switch (action.type) {

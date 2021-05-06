@@ -8,13 +8,13 @@ const Notify = () => {
     const {notify} = state
     return (
         <>
-            {notify.Loading && <Loading/>}
+            {notify.loading && <Loading/>}
             {notify.error &&
-            <Toast msg={{msg:notify.err, title:"Error"}}
+            <Toast msg={{msg: notify.error, title:"Error"}}
             handleShow={() => dispatch({type:'NOTIFY', payload:{} })}
             bgColor='bg-danger'/>}
             {notify.success &&
-            <Toast msg={{msg:notify.success, title:"Success"}}
+            <Toast msg={{msg: notify.success, title:"Success"}}
                    handleShow={() => dispatch({type:'NOTIFY', payload:{} })}
                    bgColor='bg-success'/>}
         </>
