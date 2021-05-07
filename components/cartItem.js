@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { decrease, increase } from '../store/Actions'
-import {BsTrash} from "react-icons/bs";
+import {GoTrashcan} from "react-icons/go";
 
 const CartItem = ({item, dispatch, cart}) => {
     return (
@@ -39,7 +39,7 @@ const CartItem = ({item, dispatch, cart}) => {
             </td>
 
             <td className="align-middle" style={{minWidth: '50px', cursor: 'pointer'}}>
-                <BsTrash
+                <GoTrashcan color='#fa4949'
                    style={{fontSize: '18px'}} data-toggle="modal" data-target="#exampleModal"
                    onClick={() => dispatch({
                        type: 'ADD_MODAL',
