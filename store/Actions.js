@@ -2,10 +2,10 @@ export const ACTIONS = {
     NOTIFY: 'NOTIFY',
     AUTH: 'AUTH',
     ADD_CART: 'ADD_CART',
-    // ADD_MODAL: 'ADD_MODAL',
-    // ADD_ORDERS: 'ADD_ORDERS',
-    // ADD_USERS: 'ADD_USERS',
-    // ADD_CATEGORIES: 'ADD_CATEGORIES',
+    ADD_MODAL: 'ADD_MODAL',
+    ADD_ORDERS: 'ADD_ORDERS',
+    ADD_USERS: 'ADD_USERS',
+    ADD_CATEGORIES: 'ADD_CATEGORIES',
 }
 
 export const addToCart = (product, cart) => {
@@ -16,7 +16,7 @@ export const addToCart = (product, cart) => {
         return item._id !== product._id
     })
 
-    if(!check) return ({ type: 'NOTIFY', payload: {error: 'The product has been added to cart.'} })
+    if(!check) return ({ type: 'NOTIFY', payload: {success: 'The product has been added to cart.'} })
 
     return ({ type: 'ADD_CART', payload: [...cart, {...product, quantity: 1}] })
 }

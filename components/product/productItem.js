@@ -28,7 +28,7 @@ const ProductItem = ({product, handleCheck}) => {
         return(
             <>
                 <Link href={`create/${product._id}`}>
-                    <a className="btn btn-warning"
+                    <a className="btn btn-info"
                        style={{marginRight: '5px', flex: 1}}>Edit</a>
                 </Link>
                 <button className="btn btn-danger"
@@ -53,7 +53,7 @@ const ProductItem = ({product, handleCheck}) => {
                 auth.user && auth.user.role === 'admin' &&
                 <input type="checkbox" checked={product.checked}
                        className="position-absolute"
-                       style={{height: '20px', width: '20px',top:"5px", left:"5px"}}
+                       style={{height: '20px', width: '20px'}}
                        onChange={() => handleCheck(product._id)} />
             }
             <img className="card-img-top" src={product.images[0].url} alt={product.images[0].url} />
