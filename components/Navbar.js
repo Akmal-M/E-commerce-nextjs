@@ -1,14 +1,14 @@
-import React, {useContext} from 'react';
-import Link from "next/link";
-import {useRouter} from "next/router"
+import React, { useContext } from 'react'
+import Link from 'next/link'
+import {useRouter} from 'next/router'
+import {DataContext} from '../store/GlobalState'
+import Cookie from 'js-cookie'
 import {GiShoppingCart} from "react-icons/gi";
-import {ImUser} from "react-icons/im";
-import {DataContext} from "../store/GlobalState";
 
-const Navbar = () => {
+function Navbar() {
     const router = useRouter()
-    const  {state, dispatch} = useContext(DataContext)
-    const {auth} = state
+    const {state, dispatch} = useContext(DataContext)
+    const { auth, cart } = state
 
 
     const isActive = (r) => {
@@ -51,55 +51,58 @@ const Navbar = () => {
                          style={{
                              borderRadius: '50%', width: '30px', height: '30px',
                              transform: 'translateY(-3px)', marginRight: '3px'
-                         }} /> {auth.user.name}
+                         }} /> <span style={{color:"white"}}>{auth.user.name}</span>
                 </a>
 
-                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style={{color:"white"}}>
                     <Link href="/profile">
+
+
                         <a className="dropdown-item">Profile</a>
                     </Link>
                     {
                         auth.user.role === 'admin' && adminRouter()
                     }
-                    <div className="dropdown-divider"> </div>
+                    <div className="dropdown-divider"></div>
                     <button className="dropdown-item" onClick={handleLogout}>Logout</button>
                 </div>
             </li>
         )
     }
 
-
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link href='/'>
-                <a className="navbar-brand">Akmal</a>
+        <nav className="navbar navbar-expand-lg navbar-light bg-info" >
+            <Link  href="/">
+                <a className="navbar-brand" style={{color:"white"}}>E-Commerce</a>
             </Link>
-            <button className="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link href='/cart'>
-                            <a className={"nav-link" + isActive('/cart')}><GiShoppingCart/>Cart</a>
+                <ul className="navbar-nav p-1">
+                    <li className="nav-item" >
+                        <Link href='/cart' >
+                            <a className={"nav-link" + isActive('/cart')} style={{position:"relative", color:"white"}}>
+                                <span className='position-absolute bg-danger style={{color:"white"}}'
+                                      style={{color:"white", fontSize:"12px", paddingRight:"6px", paddingLeft:"6px", borderRadius:"100%", top:"0", left:"16px"}}>{cart.length}</span>
+                                <GiShoppingCart size='30'/>Cart</a>
                         </Link>
                     </li>
-
                     {
-                        Object.keys(auth).length === 0 ?
-
-                        <li className="nav-item">
-                            <Link href='/signin'>
-                                <a className={"nav-link" + isActive('/signin')}><ImUser/>Sign In</a>
-                            </Link>
-                        </li> : loggedRouter()
+                        Object.keys(auth).length === 0
+                            ? <li className="nav-item">
+                                <Link href="/signin">
+                                    <a className={"nav-link" + isActive('/signin')} style={{color:"white"}}>
+                                        <i className="fas fa-user" aria-hidden="true" ></i> Sign in
+                                    </a>
+                                </Link>
+                            </li>
+                            : loggedRouter()
                     }
-
                 </ul>
             </div>
         </nav>
-    );
-};
+    )
+}
 
-export default Navbar;
+export default Navbar

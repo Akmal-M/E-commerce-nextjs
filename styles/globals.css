@@ -17,3 +17,6 @@ a {
 
 /*import loading css*/
 @import url("loading.css");
+
+/*import product css*/
+@import url("product.css");
