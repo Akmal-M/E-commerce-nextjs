@@ -42,24 +42,24 @@ const Modal = () => {
     }
 
     const handleSubmit = () => {
-        // if(modal.length !== 0){
-        //     for(const item of modal){
-        //         if(item.type === 'ADD_CART'){
-        //             dispatch(deleteItem(item.data, item.id, item.type))
-        //         }
-        //
-        //         if(item.type === 'ADD_USERS') deleteUser(item)
-        //
-        //         if(item.type === 'ADD_CATEGORIES') deleteCategories(item)
-        //
-        //         if(item.type === 'DELETE_PRODUCT') deleteProduct(item)
-        //
-        //         dispatch({ type: 'ADD_MODAL', payload: [] })
-        //     }
-        // }
+        if(modal.length !== 0){
+            for(const item of modal){
+                if(item.type === 'ADD_CART'){
+                    dispatch(deleteItem(item.data, item.id, item.type))
+                }
 
-        dispatch(deleteItem(modal.data,modal.id,'ADD_CART'))
-        dispatch({type: 'ADD_MODAL', payload: {} })
+                if(item.type === 'ADD_USERS') deleteUser(item)
+
+                if(item.type === 'ADD_CATEGORIES') deleteCategories(item)
+
+                if(item.type === 'DELETE_PRODUCT') deleteProduct(item)
+
+                dispatch({ type: 'ADD_MODAL', payload: [] })
+            }
+        }
+
+        // dispatch(deleteItem(modal.data, modal.id,'ADD_CART'))
+        // dispatch({type: 'ADD_MODAL', payload: {} })
     }
 
     return(
@@ -68,8 +68,8 @@ const Modal = () => {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title text-capitalize" id="exampleModalLabel">
-                            {modal.length !== 0 && modal[0].title}
-                            {/*{modal.length}*/}
+                            {/*{modal.length !== 0 && modal[0].title}*/}
+                            {modal.length}
                         </h5>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

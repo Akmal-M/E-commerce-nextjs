@@ -5,6 +5,7 @@ import CartItem from '../components/CartItem'
 import Link from 'next/link'
 import { getData, postData } from '../utils/fetchingData'
 import { useRouter } from 'next/router'
+import PaypalBtn from "../components/paypalBtn";
 
 
 const Cart = () => {
@@ -15,6 +16,7 @@ const Cart = () => {
 
     const [address, setAddress] = useState('')
     const [mobile, setMobile] = useState('')
+    const [payment, setPayment] = useState(false)
 
     const [callback, setCallback] = useState(false)
     const router = useRouter()
@@ -38,10 +40,10 @@ const Cart = () => {
             const updateCart = async () => {
                 for (const item of cartLocal){
                     const res = await getData(`product/${item._id}`)
-                    const { _id, title, images, price, inStock } = res.product
+                    const { _id, title, images, price, inStock,sold } = res.product
                     if(inStock > 0){
                         newArr.push({
-                            _id, title, images, price, inStock,
+                            _id, title, images, price, inStock, sold,
                             quantity: item.quantity > inStock ? 1 : item.quantity
                         })
                     }
@@ -95,9 +97,13 @@ const Cart = () => {
 
     if( cart.length === 0 )
         return <div className='position-relative'>
-            <img className="img-responsive w-100" src="/empty_cart.jpg" alt="not empty"/>
-            <div className='position-absolute'>
-                <Link href="/">
+            <img className="img-responsive w-100" src="https://res.cloudinary.com/bulutvoy/image/upload/v1620345821/next/matias-ilizarbe-HRYENP2Hfyc-unsplash_xkbqjo.jpg" alt="not empty"/>
+            <div className='position-absolute' style={{
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'}}>
+                <h2>Your cart is empty. Buy something</h2>
+                <Link href="/" >
                     <a className='btn btn-success'>Shop Now</a>
                 </Link>
             </div>
@@ -141,9 +147,18 @@ const Cart = () => {
                 <h3>Total: <span className="text-danger">${total}</span></h3>
 
 
-                <Link href={auth.user ? '#!' : '/signin'}>
-                    <a className="btn btn-dark my-2" onClick={handlePayment}>Proceed with payment</a>
-                </Link>
+                {   payment
+                    ? <PaypalBtn
+                    total={total}
+                    address={address}
+                    mobile={mobile}
+                    state={state}
+                    dispatch={dispatch}
+                    />
+                    : <Link href={auth.user ? '#!' : '/signin'}>
+                        <a className="btn btn-dark my-2" onClick={handlePayment}>Proceed with payment</a>
+                    </Link>
+                }
 
             </div>
         </div>
