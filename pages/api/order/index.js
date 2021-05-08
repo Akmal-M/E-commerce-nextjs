@@ -42,7 +42,6 @@ const createOrder = async (req, res) => {
             user: result.id, address, mobile, cart, total
         })
 
-        console.log(cart)
         cart.filter(item => {
             return sold(item._id, item.quantity, item.inStock, item.sold)
         })

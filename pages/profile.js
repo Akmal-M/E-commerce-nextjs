@@ -8,6 +8,8 @@ import { patchData } from '../utils/fetchingData'
 
 import {imageUpload} from '../utils/imageUpload'
 import {BiCamera} from "react-icons/bi";
+import {VscChromeClose} from "react-icons/vsc";
+import {BsCheckAll} from "react-icons/bs";
 
 const Profile = () => {
     const initialSate = {
@@ -140,7 +142,7 @@ const Profile = () => {
                     </button>
                 </div>
 
-                <div className="col-md-8">
+                <div className="col-md-8 table-responsive">
                     <h3 className="text-uppercase">Orders</h3>
 
                     <div className="my-3 table-responsive">
@@ -152,41 +154,47 @@ const Profile = () => {
                                 <td className="p-2">date</td>
                                 <td className="p-2">total</td>
                                 <td className="p-2">delivered</td>
-                                <td className="p-2">paid</td>
+                                {/*<td className="p-2">paid</td>*/}
+                                <td className="p-2">details</td>
                             </tr>
                             </thead>
 
                             <tbody>
-                            {/*{*/}
-                            {/*    orders.map(order => (*/}
-                            {/*        <tr key={order._id}>*/}
-                            {/*            <td className="p-2">*/}
-                            {/*                <Link href={`/order/${order._id}`}>*/}
-                            {/*                    <a>{order._id}</a>*/}
-                            {/*                </Link>*/}
+                            {
+                                orders.map(order => (
+                                    <tr key={order._id}>
+                                        <td className="p-2">
+                                            <Link href={`/order/${order._id}`}>
+                                                <a>{order._id}</a>
+                                            </Link>
 
-                            {/*            </td>*/}
-                            {/*            <td className="p-2">*/}
-                            {/*                {new Date(order.createdAt).toLocaleDateString()}*/}
-                            {/*            </td>*/}
-                            {/*            <td className="p-2">${order.total}</td>*/}
-                            {/*            <td className="p-2">*/}
-                            {/*                {*/}
-                            {/*                    order.delivered*/}
-                            {/*                        ? <i className="fas fa-check text-success"></i>*/}
-                            {/*                        : <i className="fas fa-times text-danger"></i>*/}
-                            {/*                }*/}
-                            {/*            </td>*/}
-                            {/*            <td className="p-2">*/}
-                            {/*                {*/}
-                            {/*                    order.paid*/}
-                            {/*                        ? <i className="fas fa-check text-success"></i>*/}
-                            {/*                        : <i className="fas fa-times text-danger"></i>*/}
-                            {/*                }*/}
-                            {/*            </td>*/}
-                            {/*        </tr>*/}
-                            {/*    ))*/}
-                            {/*}*/}
+                                        </td>
+                                        <td className="p-2">
+                                            {new Date(order.createdAt).toLocaleDateString()}
+                                        </td>
+                                        <td className="p-2">${order.total}</td>
+                                        <td className="p-2">
+                                            {
+                                                order.delivered
+                                                    ? <BsCheckAll className={'text-success'}/>
+                                                    : <VscChromeClose className={'text-danger'}/>
+                                            }
+                                        </td>
+                                        {/*<td className="p-2">*/}
+                                        {/*    {*/}
+                                        {/*        order.paid*/}
+                                        {/*            ? <BsCheckAll className="text-success"/>*/}
+                                        {/*            : <VscChromeClose className="text-danger"/>*/}
+                                        {/*    }*/}
+                                        {/*</td>*/}
+                                        <td className="p-2">
+                                            <Link href={`/order/${order._id}`}>
+                                                <a>details</a>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                             </tbody>
 
                         </table>
