@@ -56,8 +56,6 @@ function Navbar() {
 
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style={{color:"white"}}>
                     <Link href="/profile">
-
-
                         <a className="dropdown-item">Profile</a>
                     </Link>
                     {

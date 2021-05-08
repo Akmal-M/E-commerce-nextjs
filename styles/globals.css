@@ -20,3 +20,6 @@ a {
 
 /*import product css*/
 @import url("product.css");
+
+/*import profile css*/
+@import url("profile.css");
