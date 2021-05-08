@@ -1,16 +1,16 @@
 import Head from 'next/head'
-import { useContext, useState, useEffect } from 'react'
-import { DataContext } from '../store/GlobalState'
+import {useContext, useState, useEffect} from 'react'
+import {DataContext} from '../store/GlobalState'
 import CartItem from '../components/CartItem'
 import Link from 'next/link'
-import { getData, postData } from '../utils/fetchingData'
-import { useRouter } from 'next/router'
+import {getData, postData} from '../utils/fetchingData'
+import {useRouter} from 'next/router'
 import PaypalBtn from "../components/paypalBtn";
 
 
 const Cart = () => {
-    const { state, dispatch } = useContext(DataContext)
-    const { cart, auth, orders } = state
+    const {state, dispatch} = useContext(DataContext)
+    const {cart, auth, orders} = state
 
     const [total, setTotal] = useState(0)
 
@@ -25,23 +25,23 @@ const Cart = () => {
         const getTotal = () => {
             const res = cart.reduce((prev, item) => {
                 return prev + (item.price * item.quantity)
-            },0)
+            }, 0)
 
             setTotal(res)
         }
 
         getTotal()
-    },[cart])
+    }, [cart])
 
     useEffect(() => {
         const cartLocal = JSON.parse(localStorage.getItem('cart01__commerce'))
-        if(cartLocal && cartLocal.length > 0){
+        if (cartLocal && cartLocal.length > 0) {
             let newArr = []
             const updateCart = async () => {
-                for (const item of cartLocal){
+                for (const item of cartLocal) {
                     const res = await getData(`product/${item._id}`)
-                    const { _id, title, images, price, inStock,sold } = res.product
-                    if(inStock > 0){
+                    const {_id, title, images, price, inStock, sold} = res.product
+                    if (inStock > 0) {
                         newArr.push({
                             _id, title, images, price, inStock, sold,
                             quantity: item.quantity > inStock ? 1 : item.quantity
@@ -49,67 +49,75 @@ const Cart = () => {
                     }
                 }
 
-                dispatch({ type: 'ADD_CART', payload: newArr })
+                dispatch({type: 'ADD_CART', payload: newArr})
             }
 
             updateCart()
         }
-    },[callback])
+    }, [callback])
 
     const handlePayment = async () => {
-        if(!address || !mobile)
-            return dispatch({ type: 'NOTIFY', payload: {error: 'Please add your address and mobile.'}})
+        if (!address || !mobile)
+            return dispatch({type: 'NOTIFY', payload: {error: 'Please add your address and mobile.'}})
 
         let newCart = [];
-        for(const item of cart){
+        for (const item of cart) {
             const res = await getData(`product/${item._id}`)
-            if(res.product.inStock - item.quantity >= 0){
+            if (res.product.inStock - item.quantity >= 0) {
                 newCart.push(item)
             }
         }
 
-        if(newCart.length < cart.length){
+        if (newCart.length < cart.length) {
             setCallback(!callback)
-            return dispatch({ type: 'NOTIFY', payload: {
+            return dispatch({
+                type: 'NOTIFY', payload: {
                     error: 'The product is out of stock or the quantity is insufficient.'
-                }})
+                }
+            })
         }
 
-        dispatch({ type: 'NOTIFY', payload: {loading: true} })
+        dispatch({type: 'NOTIFY', payload: {loading: true}})
 
         postData('order', {address, mobile, cart, total}, auth.token)
             .then(res => {
-                if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+                if (res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
 
-                dispatch({ type: 'ADD_CART', payload: [] })
+                dispatch({type: 'ADD_CART', payload: []})
 
 
                 const newOrder = {
                     ...res.newOrder,
                     user: auth.user
                 }
-                dispatch({ type: 'ADD_ORDERS', payload: [...orders, newOrder] })
-                dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
+                dispatch({type: 'ADD_ORDERS', payload: [...orders, newOrder]})
+                dispatch({type: 'NOTIFY', payload: {success: res.msg}})
                 return router.push(`/order/${res.newOrder._id}`)
             })
 
     }
 
-    if( cart.length === 0 )
-        return <div className='position-relative'>
-            <img className="img-responsive w-100" src="https://res.cloudinary.com/bulutvoy/image/upload/v1620345821/next/matias-ilizarbe-HRYENP2Hfyc-unsplash_xkbqjo.jpg" alt="not empty"/>
-            <div className='position-absolute' style={{
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)'}}>
-                <h2>Your cart is empty. Buy something</h2>
-                <Link href="/" >
-                    <a className='btn btn-success'>Shop Now</a>
-                </Link>
+    if (cart.length === 0)
+        return <div>
+            <div>
+                <div style={{display: 'flex', justifyContent: "center"}}>
+                    <img className="img-responsive w-50"
+                         src="https://res.cloudinary.com/bulutvoy/image/upload/v1620465104/cart/empty-box_2_n12qzo.png"
+                         alt="not empty"/>
+                </div>
+
+                <div style={{textAlign: "center"}}>
+                    <h1 style={{textAlign: 'center'}} className='text-danger pb-5'>Your cart is empty. Buy
+                        something!</h1>
+                    <Link href="/">
+                        <a className='btn btn-success'>Shop Now</a>
+                    </Link>
+                </div>
+
             </div>
         </div>
 
-    return(
+    return (
         <div className="row mx-auto">
             <Head>
                 <title>Cart Page</title>
@@ -122,7 +130,7 @@ const Cart = () => {
                     <tbody>
                     {
                         cart.map(item => (
-                            <CartItem key={item._id} item={item} dispatch={dispatch} cart={cart} />
+                            <CartItem key={item._id} item={item} dispatch={dispatch} cart={cart}/>
                         ))
                     }
                     </tbody>
@@ -136,24 +144,24 @@ const Cart = () => {
                     <label htmlFor="address">Address</label>
                     <input type="text" name="address" id="address"
                            className="form-control mb-2" value={address}
-                           onChange={e => setAddress(e.target.value)} />
+                           onChange={e => setAddress(e.target.value)}/>
 
                     <label htmlFor="mobile">Mobile</label>
                     <input type="text" name="mobile" id="mobile"
                            className="form-control mb-2" value={mobile}
-                           onChange={e => setMobile(e.target.value)} />
+                           onChange={e => setMobile(e.target.value)}/>
                 </form>
 
                 <h3>Total: <span className="text-danger">${total}</span></h3>
 
 
-                {   payment
+                {payment
                     ? <PaypalBtn
-                    total={total}
-                    address={address}
-                    mobile={mobile}
-                    state={state}
-                    dispatch={dispatch}
+                        total={total}
+                        address={address}
+                        mobile={mobile}
+                        state={state}
+                        dispatch={dispatch}
                     />
                     : <Link href={auth.user ? '#!' : '/signin'}>
                         <a className="btn btn-dark my-2" onClick={handlePayment}>Proceed with payment</a>
