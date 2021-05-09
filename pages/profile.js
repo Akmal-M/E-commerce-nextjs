@@ -154,8 +154,7 @@ const Profile = () => {
                                 <td className="p-2">date</td>
                                 <td className="p-2">total</td>
                                 <td className="p-2">delivered</td>
-                                {/*<td className="p-2">paid</td>*/}
-                                <td className="p-2">details</td>
+                                <td className="p-2">paid</td>
                             </tr>
                             </thead>
 
@@ -180,18 +179,14 @@ const Profile = () => {
                                                     : <VscChromeClose className={'text-danger'}/>
                                             }
                                         </td>
-                                        {/*<td className="p-2">*/}
-                                        {/*    {*/}
-                                        {/*        order.paid*/}
-                                        {/*            ? <BsCheckAll className="text-success"/>*/}
-                                        {/*            : <VscChromeClose className="text-danger"/>*/}
-                                        {/*    }*/}
-                                        {/*</td>*/}
                                         <td className="p-2">
-                                            <Link href={`/order/${order._id}`}>
-                                                <a>details</a>
-                                            </Link>
+                                            {
+                                                order.paid
+                                                    ? <BsCheckAll className="text-success"/>
+                                                    : <VscChromeClose className="text-danger"/>
+                                            }
                                         </td>
+
                                     </tr>
                                 ))
                             }

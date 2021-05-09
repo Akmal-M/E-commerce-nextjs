@@ -30,6 +30,10 @@ const PaypalBtn = ({total,address,mobile,state,dispatch}) => {
                             if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
 
                             dispatch({type:'ADD_CART', payload:[]})
+                            const newOrder =  {
+                                ...res.newOrder,
+                                user: auth.user
+                            }
                             dispatch({type:'ADD_ORDERS', payload:[...orders, res.newOrder]})
 
 

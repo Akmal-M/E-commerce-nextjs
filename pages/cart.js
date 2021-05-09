@@ -5,7 +5,6 @@ import CartItem from '../components/CartItem'
 import Link from 'next/link'
 import {getData, postData} from '../utils/fetchingData'
 import {useRouter} from 'next/router'
-import PaypalBtn from "../components/paypalBtn";
 
 
 const Cart = () => {
@@ -16,7 +15,6 @@ const Cart = () => {
 
     const [address, setAddress] = useState('')
     const [mobile, setMobile] = useState('')
-    const [payment, setPayment] = useState(false)
 
     const [callback, setCallback] = useState(false)
     const router = useRouter()
@@ -155,18 +153,10 @@ const Cart = () => {
                 <h3>Total: <span className="text-danger">${total}</span></h3>
 
 
-                {payment
-                    ? <PaypalBtn
-                        total={total}
-                        address={address}
-                        mobile={mobile}
-                        state={state}
-                        dispatch={dispatch}
-                    />
-                    : <Link href={auth.user ? '#!' : '/signin'}>
-                        <a className="btn btn-dark my-2" onClick={handlePayment}>Proceed with payment</a>
-                    </Link>
-                }
+                <Link href={auth.user ? '#!' : '/signin'}>
+                    <a className="btn btn-dark my-2" onClick={handlePayment}>Proceed with payment</a>
+                </Link>
+
 
             </div>
         </div>
