@@ -1,11 +1,12 @@
 import { useEffect, useRef, useContext } from 'react'
-import {patchData, postData} from '../utils/fetchingData'
+import { patchData } from '../utils/fetchingData'
 import {DataContext} from '../store/GlobalState'
 import {updateItem} from '../store/Actions'
 
-const PaypalBtn = ({total,address,mobile,state,dispatch}) => {
+const paypalBtn = ({order}) => {
     const refPaypalBtn = useRef()
-    const {cart, auth, orders} = state
+    const {state, dispatch} = useContext(DataContext)
+    const { auth, orders} = state
 
     useEffect(() => {
         paypal.Buttons({
@@ -25,22 +26,21 @@ const PaypalBtn = ({total,address,mobile,state,dispatch}) => {
 
                 return actions.order.capture().then(function(details) {
 
-                    postData('order', {address,mobile, cart, total}, auth.token)
+                    patchData(`order/payment/${order._id}`, {
+                        paymentId: details.payer.payer_id
+                    }, auth.token)
                         .then(res => {
                             if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
 
-                            dispatch({type:'ADD_CART', payload:[]})
-                            const newOrder =  {
-                                ...res.newOrder,
-                                user: auth.user
-                            }
-                            dispatch({type:'ADD_ORDERS', payload:[...orders, res.newOrder]})
-
-
+                            dispatch(updateItem(orders, order._id, {
+                                ...order,
+                                paid: true, dateOfPayment: details.create_time,
+                                paymentId: details.payer.payer_id, method: 'Paypal'
+                            }, 'ADD_ORDERS'))
 
                             return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
                         })
-                    // This function shows a transaction success message to buyer.
+                    // This function shows a transaction success message to your buyer.
                 });
             }
         }).render(refPaypalBtn.current);
@@ -51,4 +51,4 @@ const PaypalBtn = ({total,address,mobile,state,dispatch}) => {
     )
 }
 
-export default PaypalBtn
+export default paypalBtn
