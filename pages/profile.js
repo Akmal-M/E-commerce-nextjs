@@ -150,6 +150,7 @@ const Profile = () => {
                                style={{minWidth: '600px', cursor: 'pointer'}}>
                             <thead className="bg-light font-weight-bold">
                             <tr>
+                                {/*<td className="p-2">name</td>*/}
                                 <td className="p-2">id</td>
                                 <td className="p-2">date</td>
                                 <td className="p-2">total</td>
@@ -162,6 +163,11 @@ const Profile = () => {
                             {
                                 orders.map(order => (
                                     <tr key={order._id}>
+                                        {/*<td className="p-2">*/}
+                                        {/*    <div >*/}
+                                        {/*        <a>{order.user.name}</a>*/}
+                                        {/*    </div>*/}
+                                        {/*</td>*/}
                                         <td className="p-2">
                                             <Link href={`/order/${order._id}`}>
                                                 <a>{order._id}</a>
