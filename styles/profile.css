@@ -26,7 +26,7 @@
     text-align: center;
     font-weight: 400;
     color: rgb(255, 140, 45);
-    transition: 0.3 ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 
 .profile_page .avatar:hover span{
@@ -44,4 +44,12 @@
 }
 ::-webkit-file-upload-button{
     cursor: pointer;
+}
+
+
+/*edit user*/
+.edit-user {
+    max-width: 400px;
+    width: 100%;
+    border:1px solid #eee;
 }
