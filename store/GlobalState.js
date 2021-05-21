@@ -86,6 +86,10 @@
 //     )
 // }
 
+
+
+
+
 import { createContext, useReducer, useEffect } from 'react'
 import reducers from './Reducers'
 import { getData } from '../utils/fetchingData'
@@ -103,7 +107,6 @@ export const DataProvider = ({children}) => {
         orders: [],
         users: [],
         categories: [],
-        banners: []
     }
 
     const [state, dispatch] = useReducer(reducers, initialState)

@@ -47,7 +47,7 @@ const DetailProduct = (props) => {
                     {
                         product.inStock > 0
                             ? <h6 className="text-danger">In Stock: {product.inStock}</h6>
-                            : <h6 className="text-danger">Out of Stock</h6>
+                            : <h6 className="text-danger">Out Stock</h6>
                     }
 
                     <h6 className="text-danger">Sold: {product.sold}</h6>
@@ -58,7 +58,7 @@ const DetailProduct = (props) => {
                     {product.content}
                 </div>
 
-                <button type="button" className="btn btn-warning d-block my-3 px-5"
+                <button type="button" className="btn btn-dark d-block my-3 px-5"
                         onClick={() => dispatch(addToCart(product, cart))} >
                     Buy
                 </button>

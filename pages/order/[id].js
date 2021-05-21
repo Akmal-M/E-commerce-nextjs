@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import OrderDetail from '../../components/OrderDetail'
 import {CgArrowLongLeft} from "react-icons/cg";
 

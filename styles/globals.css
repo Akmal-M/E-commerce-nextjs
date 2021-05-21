@@ -23,3 +23,6 @@ a {
 
 /*import profile css*/
 @import url("profile.css");
+
+/*import products_manager css*/
+@import url("products_manager.css");
