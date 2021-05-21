@@ -58,8 +58,8 @@ const Modal = () => {
             }
         }
 
-        // dispatch(deleteItem(modal.data, modal.id,'ADD_CART'))
-        // dispatch({type: 'ADD_MODAL', payload: {} })
+        dispatch(deleteItem(modal.data, modal.id,'ADD_CART'))
+        dispatch({type: 'ADD_MODAL', payload: {} })
     }
 
     return(

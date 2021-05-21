@@ -4,8 +4,7 @@ import {DataContext} from '../../store/GlobalState'
 import {updateItem} from '../../store/Actions'
 
 import {useRouter} from 'next/router'
-import {patchData} from '../../utils/fetchData'
-import {FaLongArrowAltLeft} from "react-icons/fa";
+import {patchData} from '../../utils/fetchingData'
 
 const EditUser = () => {
     const router = useRouter()
@@ -59,7 +58,7 @@ const EditUser = () => {
 
             <div>
                 <button className="btn btn-dark" onClick={() => router.back()}>
-                    <FaLongArrowAltLeft className=" " aria-hidden>Go Back</FaLongArrowAltLeft>
+                    <i className="fas fa-long-arrow-alt-left" aria-hidden></i> Go Back
                 </button>
             </div>
 

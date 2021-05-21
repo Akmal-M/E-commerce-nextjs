@@ -38,6 +38,11 @@ const reducers = (state, action) => {
                 ...state,
                 categories: action.payload
             };
+        case ACTIONS.ADD_BANNERS:
+            return {
+                ...state,
+                banners: action.payload
+            };
         default:
             return state;
     }

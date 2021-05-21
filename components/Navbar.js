@@ -61,7 +61,7 @@ function Navbar() {
                     {
                         auth.user.role === 'admin' && adminRouter()
                     }
-                    <div className="dropdown-divider"></div>
+                    <div className="dropdown-divider"/>
                     <button className="dropdown-item" onClick={handleLogout}>Logout</button>
                 </div>
             </li>
