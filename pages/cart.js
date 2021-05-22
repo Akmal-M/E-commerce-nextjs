@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import {useContext, useState, useEffect} from 'react'
 import {DataContext} from '../store/GlobalState'
-import CartItem from '../components/CartItem'
+import CartItem from "../components/CartItem";
 import Link from 'next/link'
 import {getData, postData} from '../utils/fetchingData'
 import {useRouter} from 'next/router'

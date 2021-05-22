@@ -69,7 +69,8 @@ const Home = (props) => {
             <Filter state={state} />
 
             {
-                !auth.user && auth.user && auth.user.role === 'admin' &&
+
+                auth.user && auth.user.role === 'admin' &&
                 <div className="delete_all btn btn-danger mt-2" style={{marginBottom: '-10px'}}>
                     <input type="checkbox" checked={isCheck} onChange={handleCheckALL}
                            style={{width: '25px', height: '25px', transform: 'translateY(8px)'}} />

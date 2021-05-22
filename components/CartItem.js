@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { decrease, increase } from '../store/Actions'
-import {GoTrashcan} from "react-icons/go";
+import {FaTrashAlt} from "react-icons/fa";
 
 const CartItem = ({item, dispatch, cart}) => {
     return (
@@ -39,7 +39,7 @@ const CartItem = ({item, dispatch, cart}) => {
             </td>
 
             <td className="align-middle" style={{minWidth: '50px', cursor: 'pointer'}}>
-                <GoTrashcan color='#fa4949'
+                <FaTrashAlt className="text-danger" aria-hidden="true"
                    style={{fontSize: '18px'}} data-toggle="modal" data-target="#exampleModal"
                    onClick={() => dispatch({
                        type: 'ADD_MODAL',
@@ -50,4 +50,4 @@ const CartItem = ({item, dispatch, cart}) => {
     )
 }
 
-export default CartItem
+export default CartItem;
